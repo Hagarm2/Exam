@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:exam/secondscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   int index = 0;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -83,23 +85,50 @@ class _FirstScreenState extends State<FirstScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image(
-                    image: AssetImage('assets/images/Frame 14.png'),
-                    height: 88,
-                    width: 60,
+                  CircleAvatar(
+                    backgroundColor: Color(0xffE4E7EC),
+                    radius: 30,
+                    child: Image.asset("assets/images/Frame.png"),
                   ),
-                  Image(
-                      image: AssetImage('assets/images/Frame 19.png'),
-                      height: 88,
-                      width: 60),
-                  Image(
-                      image: AssetImage('assets/images/Frame 15.png'),
-                      height: 88,
-                      width: 60),
-                  Image(
-                      image: AssetImage('assets/images/Frame 16.png'),
-                      height: 88,
-                      width: 60),
+                  CircleAvatar(
+                    backgroundColor: Color(0xffE4E7EC),
+                    radius: 30,
+                    child: Image.asset("assets/images/Frame (1).png"),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Color(0xffE4E7EC),
+                    radius: 30,
+                    child: Image.asset("assets/images/Frame (4).png"),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Color(0xffE4E7EC),
+                    radius: 30,
+                    child: Image.asset("assets/images/Frame (3).png"),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Love',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    'Cool',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    'Happy',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    'Sad',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  ),
                 ],
               ),
             ),
@@ -131,35 +160,43 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             ),
             Container(
-                child: Center(
-                    child: CarouselSlider(
-              items: [
-                Image(
-                  image: AssetImage('assets/images/Frame 24.png'),
-                  //width: 950,
-                  fit: BoxFit.fitWidth,
+              child: Center(
+                child: CarouselSlider(
+                  items: [
+                    Image(
+                      image: AssetImage('assets/images/Frame 24.png'),
+                      //width: 950,
+                      fit: BoxFit.fitWidth,
+                    ),
+                    Image(
+                      image: AssetImage('assets/images/Frame 24.png'),
+                      //width: 950,
+                      fit: BoxFit.fitWidth,
+                    ),
+                    Image(
+                      image: AssetImage('assets/images/Frame 24.png'),
+                      // width: 950,
+                      fit: BoxFit.fitWidth,
+                    )
+                  ],
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
                 ),
-                Image(
-                  image: AssetImage('assets/images/Frame 24.png'),
-                  //width: 950,
-                  fit: BoxFit.fitWidth,
-                ),
-                Image(
-                  image: AssetImage('assets/images/Frame 24.png'),
-                  // width: 950,
-                  fit: BoxFit.fitWidth,
-                )
-              ],
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 2.0,
-                enlargeCenterPage: true,
 
-                // autoPlayAnimationDuration: Duration(milliseconds: 800),
-                // autoPlayInterval: Duration(seconds: 3),
-                // enlargeFactor: 0.3,
-              ), // CarouselController:
-            ))),
+              ),
+            ),
+            DotsIndicator(
+              dotsCount: 3,
+              position: currentIndex.toDouble(),
+            ),
             /* Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(child: Icon(Icons.more_horiz,size: 50,)),
@@ -224,11 +261,13 @@ class _FirstScreenState extends State<FirstScreen> {
               label: "."),
           BottomNavigationBarItem(
               icon: InkWell(
-                onTap:(){ Navigator.pushNamed(context, SecondScreen.routename);},
+                  onTap: () {
+                    Navigator.pushNamed(context, SecondScreen.routename);
+                  },
                   child: ImageIcon(
-                AssetImage('assets/images/grid-01.png'),
-                color: Colors.green,
-              )),
+                    AssetImage('assets/images/grid-01.png'),
+                    color: Colors.green,
+                  )),
               label: "."),
           BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('assets/images/calendar.png'),
